@@ -20,7 +20,7 @@ struct ColorSlider: View {
             
             Slider(value: $sliderValue, in: 0...255, step: 1)
                 .accentColor(color)
-                .onChange(of: sliderValue) { _ in
+                .onChange(of: sliderValue) {
                     textValue = "\(lround(sliderValue))"
                 }
             SliderValueTF(textValue: $textValue, value: $sliderValue)
