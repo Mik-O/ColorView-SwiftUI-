@@ -8,29 +8,37 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var color: Color = .blue
-    @State private var text = ""
-    @State private var slider = 0.5
+    
+    @State private var red = Double.random(in: 0...255)
+    @State private var green = Double.random(in: 0...255)
+    @State private var blue = Double.random(in: 0...255)
+    
     
     var body: some View {
-        VStack(spacing: 20) {
-            Rectangle()
-                .frame(width: 200, height: 200)
-                .padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20))
-                .cornerRadius(10)
-            HStack(spacing: 20) {
-                Text(text)
-                Slider(value: $slider)
-            }
-
-            Spacer()
-
+        ZStack {
+            Color(.gray).ignoresSafeArea()
             
+            VStack {
+                VStack(spacing: 40) {
+                    ColorView(red: red, green: green, blue: blue)
+                    
+                    VStack {
+                        ColorSlider(sliderValue: $red, color: .red)
+                        ColorSlider(sliderValue: $green, color: .green)
+                        ColorSlider(sliderValue: $blue, color: .blue)
+                        
+                    }
+                    .frame(height: 150)
+                }
+                .padding()
+                
+                Spacer()
+            }
         }
-        .padding()
     }
 }
-
-#Preview {
-    ContentView()
-}
+    
+    
+    #Preview {
+        ContentView()
+    }
